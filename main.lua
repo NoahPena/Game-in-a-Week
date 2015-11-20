@@ -2,6 +2,8 @@ require("levelOne")
 require("levelTwo")
 
 state = "levelOne"
+
+--state = "levelTwo"
 --state = "test"
 
 function love.load(arg)
@@ -10,15 +12,19 @@ function love.load(arg)
   io.stdout:setvbuf('no')
 
   love.physics.setMeter(64)
-
-  levelOne.load(arg)
-  levelTwo.load(arg)
   
-    world = love.physics.newWorld(0, 0)
-    body = love.physics.newBody(world, love.mouse.getX(), love.mouse.getY(), "dynamic")
-    shape = love.physics.newCircleShape(20)
-    fixture = love.physics.newFixture(body, shape)
-    joint = love.physics.newMouseJoint(body, love.mouse.getPosition())
+  if state == "levelOne" then
+    
+    levelOne.load(arg)
+    
+  elseif state == "levelTwo" then
+    
+    levelTwo.load(arg)
+    
+  end
+
+  --levelOne.load(arg)
+  --levelTwo.load(arg)
 
 end
 
@@ -33,9 +39,6 @@ function love.update(dt)
     levelTwo.update(dt)
     
   elseif state == "test" then
-    
-    joint:setTarget(love.mouse.getPosition())
-    world:update(dt)
     
   end
   
@@ -52,8 +55,6 @@ function love.draw()
     levelTwo.draw()
     
   elseif state == "test" then
-  
-love.graphics.circle("fill", body:getX(), body:getY(), shape:getRadius())
     
   end
   

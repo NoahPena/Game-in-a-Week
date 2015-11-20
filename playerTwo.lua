@@ -9,7 +9,7 @@ function playerTwo.update(dt, objects)
   for i = 1, #objects do
     
     if objects[i].grabbed then
-      print("updateGrabbed")
+      --print("updateGrabbed")
       --objects[i].joint:setTarget(love.mouse.getPosition())
       --objects[i].body:setPosition(love.mouse.getPosition())
       local x = select(1, love.mouse.getPosition()) - select(1, objects[i].body:getPosition())
@@ -21,7 +21,7 @@ function playerTwo.update(dt, objects)
   end
   
   if love.mouse.isDown("l") then
-    print("left")
+    --print("left")
     for i = 1, #objects do
       
       if objects[i].fixture:testPoint(love.mouse.getPosition()) then
@@ -38,12 +38,12 @@ function playerTwo.update(dt, objects)
       
     end
     
-    print("finished")
+    --print("finished")
     
   else
     
     for i = 1, #objects do
-      print("not pressed")
+      --print("not pressed")
       if objects[i].fixture:testPoint(love.mouse.getPosition()) and objects[i].grabbed then
         
         objects[i].grabbed = false

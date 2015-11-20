@@ -3,7 +3,6 @@ levelOne = {}
 local keyboardPlayer = require("playerOne")
 local mousePlayer = require("playerTwo")
 
-
 local world, objects, pickupableObjects
 
 function levelOne.load(arg)
@@ -31,13 +30,13 @@ function levelOne.load(arg)
   objects.boundOne.shape = love.physics.newRectangleShape(25, 1200)
   objects.boundOne.fixture = love.physics.newFixture(objects.boundOne.body, objects.boundOne.shape)
   
-  objects.boundTwo = {}
+  objects.boundTwo --[[falling in love]]= {}
   objects.boundTwo.body = love.physics.newBody(world, 0, 0, "static")
-  objects.boundTwo.shape = love.physics.newRectangleShape(1500, 25)
+  objects.boundTwo.shape = love.physics.newRectangleShape(1700, 25)
   objects.boundTwo.fixture = love.physics.newFixture(objects.boundTwo.body, objects.boundTwo.shape)
   
   objects.boundThree = {}
-  objects.boundThree.body = love.physics.newBody(world, 1400, 0, "static")
+  objects.boundThree.body = love.physics.newBody(world, 800, 25, "static")
   objects.boundThree.shape = love.physics.newRectangleShape(25, 1200)
   objects.boundThree.fixture = love.physics.newFixture(objects.boundThree.body, objects.boundThree.shape)
   
@@ -57,6 +56,19 @@ function levelOne.load(arg)
   objects.blockOne.fixture:setFriction(1)
   objects.blockOne.fixture:setRestitution(0)
   
+  --collision shit
+  objects.endzone = {}
+  objects.endzone.width = 25
+  objects.endzone.height = 25
+  objects.endzone.getDimensions = function()
+                                  
+                                    return objects.endzone.width, objects.endzone.height
+                                  
+                                  end
+  objects.endzone.body = love.physics.newBody(world, 750, 550 - (50 / 2), "static")
+  objects.endzone.shape = love.physics.newRectangleShape(25, 25)
+  objects.endzone.fixture = love.physics.newFixture(objects.endzone.body, objects.endzone.shape)
+  
   keyboardPlayer.create(world)
   
   keyboardPlayer.setPosition(5, 50)
@@ -70,6 +82,32 @@ function levelOne.update(dt)
   world:update(dt)
   keyboardPlayer.update(dt)
   mousePlayer.update(dt, pickupableObjects)
+  
+  local a,b = keyboardPlayer.getPosition()
+  local c,d = keyboardPlayer.getDimensions()
+  local e,f = objects.endzone.body:getPosition()
+  local g,h = objects.endzone.getDimensions()
+  
+  --print(a,b,c,d,e,f,g,h)
+  
+  if CheckCollision(a,b,c,d,e,f,g,h) then
+    
+    print("we made it")
+    world:destroy()
+    levelTwo.load("nigga")
+    state = "levelTwo"
+    
+  end
+  
+
+  --[[if CheckCollision(keyboardPlayer.getX(), keyboardPlayer.getY(), keyboardPlayer.getDimensions(), objects.endzone.body:getPosition(), objects.endzone.width, objects.endzone.height) then
+    
+    print("we made it")
+    
+  end]]
+  
+
+  
   
 end
 
@@ -89,11 +127,27 @@ function levelOne.draw()
   love.graphics.polygon("fill", objects.boundTwo.body:getWorldPoints(objects.boundTwo.shape:getPoints()))
   love.graphics.polygon("fill", objects.boundThree.body:getWorldPoints(objects.boundThree.shape:getPoints()))
   
+  --draw collisions
+  love.graphics.setColor(13, 37, 69)
+  love.graphics.polygon("line", objects.endzone.body:getWorldPoints(objects.endzone.shape:getPoints()))
+  
   --draw blocks
   love.graphics.setColor(25, 25, 25)
   
   love.graphics.polygon("fill", objects.blockOne.body:getWorldPoints(objects.blockOne.shape:getPoints()))
   
+  
   love.graphics.setColor(255, 255, 255)
   
+end
+
+-- Collision detection function.
+-- Returns true if two boxes overlap, false if they don't
+-- x1,y1 are the left-top coords of the first box, while w1,h1 are its width and height
+-- x2,y2,w2 & h2 are the same, but for the second box
+function CheckCollision(x1,y1,w1,h1, x2,y2,w2,h2)
+  return x1 < x2+w2 and
+         x2 < x1+w1 and
+         y1 < y2+h2 and
+         y2 < y1+h1
 end

@@ -8,6 +8,8 @@ require("mainMenu")
 --state = "test"
 state = "mainMenu"
 
+currentObjects = nil
+
 function love.load(arg)
 
   if arg[#arg] == "-debug" then require("mobdebug").start() end
@@ -71,6 +73,36 @@ function love.draw()
     
     mainMenu.draw()
     
+  end
+  
+end
+
+function love.mousepressed(x, y, mb)
+  
+  if mb == "wu" and currentObjects ~= nil then
+    
+    for i = 1, #currentObjects do
+      
+      if currentObjects[i].grabbed then
+        
+        currentObjects[i].body:setAngle(currentObjects[i].body:getAngle() + .2)
+        
+      end
+      
+    end
+  
+  elseif mb == "wd" and currentObjects ~= nil then
+    
+    for i = 1, #currentObjects do
+      
+      if currentObjects[i].grabbed then
+        
+        currentObjects[i].body:setAngle(currentObjects[i].body:getAngle() - .2)
+        
+      end
+      
+    end
+  
   end
   
 end

@@ -79,6 +79,8 @@ end
 
 function levelOne.update(dt)
   
+  currentObjects = pickupableObjects
+  
   world:update(dt)
   local status = keyboardPlayer.update(dt)
   mousePlayer.update(dt, pickupableObjects)
@@ -91,6 +93,7 @@ function levelOne.update(dt)
   if status == false then
   
     world:destroy()
+    currentObjects = nil
     levelOne.load("nigga")
   
   end

@@ -2,6 +2,7 @@ local playerTwo = {x = 0, y = 0, speed = 100, isHolding = false}
 
 --local joint
 
+
 function playerTwo.update(dt, objects)
 
   --playerTwo.setPosition(love.mouse.getPosition())

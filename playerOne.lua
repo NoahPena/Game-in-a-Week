@@ -24,10 +24,10 @@ function playerOne.create(world)
   
 end
 
-function playerOne.update(dt)
+function playerOne.update(dt, buttons)
   
   --playerOne.box.body:applyForce(0, 4000000)
-  bullet.update(dt)
+  bullet.update(dt, buttons)
   
   if currentDelay <= 0 then
     
@@ -44,7 +44,7 @@ function playerOne.update(dt)
   
   if select(2, playerOne.box.body:getPosition()) >= love.window.getHeight() then
     
-    print("dead")
+    --print("dead")
     return false
     
   end
@@ -82,7 +82,7 @@ function playerOne.update(dt)
   if love.keyboard.isDown(" ") and shot == false then
     
     --shoot
-    print("nigga")
+    --print("nigga")
     bullet.create(playerOne.getX(), playerOne.getY(), playerOne.direction)
     shot = true
     

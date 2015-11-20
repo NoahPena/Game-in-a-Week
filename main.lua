@@ -1,10 +1,12 @@
 require("levelOne")
 require("levelTwo")
+require("levelThree")
 require("mainMenu")
 
 --state = "levelOne"
 
 --state = "levelTwo"
+--state = "levelThree"
 --state = "test"
 state = "mainMenu"
 
@@ -24,6 +26,10 @@ function love.load(arg)
   elseif state == "levelTwo" then
     
     levelTwo.load(arg)
+    
+  elseif state == "levelThree" then
+    
+    levelThree.load(arg)
   
   elseif state == "mainMenu" then
   
@@ -46,6 +52,10 @@ function love.update(dt)
     
     levelTwo.update(dt)
     
+  elseif state == "levelThree" then
+    
+    levelThree.update(dt)
+    
   elseif state == "test" then
     
   
@@ -66,6 +76,10 @@ function love.draw()
   elseif state == "levelTwo" then
     
     levelTwo.draw()
+    
+  elseif state == "levelThree" then
+    
+    levelThree.draw()
     
   elseif state == "test" then
     

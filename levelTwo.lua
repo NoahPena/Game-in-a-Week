@@ -100,6 +100,10 @@ function levelTwo.update(dt)
   
   if CheckCollision(a,b,c,d,e,f,g,h) then
     
+    world:destroy()
+    currentObjects = nil
+    state = "levelThree"
+    levelThree.load("nigga")
     print("we made it")
     
   end

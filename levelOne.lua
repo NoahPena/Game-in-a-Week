@@ -42,7 +42,7 @@ function levelOne.load(arg)
   
   --block shit
   objects.blockOne = {}
-  objects.blockOne.body = love.physics.newBody(world, 200, (600 - 50/2) - (50), "kinematic")
+  objects.blockOne.body = love.physics.newBody(world, 200, (600 - 50/2) + 25/2 - (50), "kinematic")
   objects.blockOne.shape = love.physics.newRectangleShape(200, 25)
   objects.blockOne.fixture = love.physics.newFixture(objects.blockOne.body, objects.blockOne.shape)
   objects.blockOne.grabbed = false
@@ -65,7 +65,7 @@ function levelOne.load(arg)
                                     return objects.endzone.width, objects.endzone.height
                                   
                                   end
-  objects.endzone.body = love.physics.newBody(world, 750, 550 - (50 / 2), "static")
+  objects.endzone.body = love.physics.newBody(world, 750, 550 - 25/2, "static")
   objects.endzone.shape = love.physics.newRectangleShape(25, 25)
   objects.endzone.fixture = love.physics.newFixture(objects.endzone.body, objects.endzone.shape)
   

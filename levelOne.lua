@@ -80,13 +80,20 @@ end
 function levelOne.update(dt)
   
   world:update(dt)
-  keyboardPlayer.update(dt)
+  local status = keyboardPlayer.update(dt)
   mousePlayer.update(dt, pickupableObjects)
   
   local a,b = keyboardPlayer.getPosition()
   local c,d = keyboardPlayer.getDimensions()
   local e,f = objects.endzone.body:getPosition()
   local g,h = objects.endzone.getDimensions()
+  
+  if status == false then
+  
+    world:destroy()
+    levelOne.load("nigga")
+  
+  end
   
   --print(a,b,c,d,e,f,g,h)
   
@@ -97,17 +104,7 @@ function levelOne.update(dt)
     levelTwo.load("nigga")
     state = "levelTwo"
     
-  end
-  
-
-  --[[if CheckCollision(keyboardPlayer.getX(), keyboardPlayer.getY(), keyboardPlayer.getDimensions(), objects.endzone.body:getPosition(), objects.endzone.width, objects.endzone.height) then
-    
-    print("we made it")
-    
-  end]]
-  
-
-  
+  end  
   
 end
 

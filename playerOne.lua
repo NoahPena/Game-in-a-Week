@@ -22,6 +22,13 @@ function playerOne.update(dt)
   
   --playerOne.box.body:applyForce(0, 4000000)
   
+  if select(2, playerOne.box.body:getPosition()) >= love.window.getHeight() then
+    
+    print("dead")
+    return false
+    
+  end
+  
   if love.keyboard.isDown("a") then
     
     if (playerOne.box.body:getX() - (playerOne.speed * dt)) > 0 then
@@ -49,6 +56,8 @@ function playerOne.update(dt)
     print("nigga")
     
   end
+  
+  return true
   
 end
 

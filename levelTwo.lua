@@ -3,6 +3,7 @@ levelTwo = {}
 local keyboardPlayer = require("playerOne")
 local mousePlayer = require("playerTwo")
 
+
 local world, objects, pickupableObjects
 
 function levelTwo.load(arg)
@@ -77,13 +78,20 @@ end
 function levelTwo.update(dt)
   
   world:update(dt)
-  keyboardPlayer.update(dt)
+  local status = keyboardPlayer.update(dt)
   mousePlayer.update(dt, pickupableObjects)
   
   local a,b = keyboardPlayer.getPosition()
   local c,d = keyboardPlayer.getDimensions()
   local e,f = objects.endzone.body:getPosition()
   local g,h = objects.endzone.getDimensions()
+  
+  if status == false then
+    
+    world:destroy()
+    levelTwo.load("nigga")
+    
+  end
   
   --print(a,b,c,d,e,f,g,h)
   

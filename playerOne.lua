@@ -1,4 +1,10 @@
-local playerOne = {x = 0, y = 0, width = 25, height = 25, speed = 100, health = 3}
+local playerOne = {x = 0, y = 0, width = 25, height = 25, speed = 100, health = 3, direction = "right"}
+
+require("bullet")
+
+local delay = 10
+local currentDelay = delay
+local shot = false
 
 function playerOne.create(world)
   
@@ -21,6 +27,20 @@ end
 function playerOne.update(dt)
   
   --playerOne.box.body:applyForce(0, 4000000)
+  bullet.update(dt)
+  
+  if currentDelay <= 0 then
+    
+    currentDelay = delay
+    shot = false
+    
+  end
+  
+  if shot then
+    
+    currentDelay = currentDelay - 1
+    
+  end
   
   if select(2, playerOne.box.body:getPosition()) >= love.window.getHeight() then
     
@@ -30,6 +50,8 @@ function playerOne.update(dt)
   end
   
   if love.keyboard.isDown("a") then
+    
+    playerOne.direction = "left"
     
     if (playerOne.box.body:getX() - (playerOne.speed * dt)) > 0 then
       
@@ -41,6 +63,7 @@ function playerOne.update(dt)
   
   if love.keyboard.isDown("d") then
     
+    playerOne.direction = "right"
     
     if (playerOne.box.body:getX() + (playerOne.speed * dt)) < love.window.getWidth() then
       
@@ -50,10 +73,18 @@ function playerOne.update(dt)
     
   end
   
-  if love.keyboard.isDown("space") then
+  if love.keyboard.isDown("w") then
+    
+    playerOne.direction = "up"
+    
+  end
+  
+  if love.keyboard.isDown(" ") and shot == false then
     
     --shoot
     print("nigga")
+    bullet.create(playerOne.getX(), playerOne.getY(), playerOne.direction)
+    shot = true
     
   end
   
@@ -66,6 +97,8 @@ function playerOne.draw()
   love.graphics.polygon("line", playerOne.box.body:getWorldPoints(playerOne.box.shape:getPoints()))
   
   love.graphics.print("PlayerX: "..tostring(playerOne.getX()).."\nPLayerY: "..tostring(playerOne.getY()), 200, 100)
+  
+  bullet.draw()
   
 end
 

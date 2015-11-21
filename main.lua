@@ -1,14 +1,18 @@
 require("levelOne")
 require("levelTwo")
 require("levelThree")
+require("levelFour")
+require("bossFight")
 require("mainMenu")
 
 --state = "levelOne"
 
 --state = "levelTwo"
 --state = "levelThree"
+--state = "levelFour"
+state = "bossFight"
 --state = "test"
-state = "mainMenu"
+--state = "mainMenu"
 
 currentObjects = nil
 
@@ -30,6 +34,14 @@ function love.load(arg)
   elseif state == "levelThree" then
     
     levelThree.load(arg)
+    
+  elseif state == "levelFour" then
+    
+    levelFour.load(arg)
+    
+  elseif state == "bossFight" then
+    
+    bossFight.load(arg)
   
   elseif state == "mainMenu" then
   
@@ -56,6 +68,14 @@ function love.update(dt)
     
     levelThree.update(dt)
     
+  elseif state == "levelFour" then
+    
+    levelFour.update(dt)
+    
+  elseif state == "bossFight" then
+    
+    bossFight.update(dt)
+    
   elseif state == "test" then
     
   
@@ -80,6 +100,14 @@ function love.draw()
   elseif state == "levelThree" then
     
     levelThree.draw()
+    
+  elseif state == "levelFour" then
+    
+    levelFour.draw()
+    
+  elseif state == "bossFight" then
+    
+    bossFight.draw()
     
   elseif state == "test" then
     
@@ -119,4 +147,20 @@ function love.mousepressed(x, y, mb)
   
   end
   
+end
+
+function beginContact(a, b, coll)
+ 
+end
+ 
+function endContact(a, b, coll)
+ 
+end
+ 
+function preSolve(a, b, coll)
+ 
+end
+ 
+function postSolve(a, b, coll, normalimpulse1, tangentimpulse1, normalimpulse2, tangentimpulse2)
+ 
 end

@@ -3,7 +3,7 @@ levelOne = {}
 local keyboardPlayer = require("playerOne")
 local mousePlayer = require("playerTwo")
 
-local world, objects, pickupableObjects
+local world, objects, pickupableObjects, buttons
 
 function levelOne.load(arg)
   
@@ -11,6 +11,8 @@ function levelOne.load(arg)
   world = love.physics.newWorld(0, 9.81 * 1000, true)
   
   pickupableObjects = {}
+  
+  buttons = {}
   
   --ground shit
   objects = {}
@@ -82,7 +84,7 @@ function levelOne.update(dt)
   currentObjects = pickupableObjects
   
   world:update(dt)
-  local status = keyboardPlayer.update(dt)
+  local status = keyboardPlayer.update(dt, buttons)
   mousePlayer.update(dt, pickupableObjects)
   
   local a,b = keyboardPlayer.getPosition()

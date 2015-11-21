@@ -9,6 +9,9 @@ local shot = false
 function playerOne.create(world)
   
   playerOne.box = {}
+  playerOne.box.width = 25
+  playerOne.box.height = 25
+  playerOne.box.isPlayer = true
   playerOne.box.body = love.physics.newBody(world, playerOne.x, playerOne.y, "dynamic")
   playerOne.box.shape = love.physics.newRectangleShape(0, 0, playerOne.width, playerOne.height)
   playerOne.box.fixture = love.physics.newFixture(playerOne.box.body, playerOne.box.shape, 5)

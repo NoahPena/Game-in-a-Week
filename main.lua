@@ -10,9 +10,9 @@ require("mainMenu")
 --state = "levelTwo"
 --state = "levelThree"
 --state = "levelFour"
-state = "bossFight"
+--state = "bossFight"
 --state = "test"
---state = "mainMenu"
+state = "mainMenu"
 
 currentObjects = nil
 
